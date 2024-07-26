@@ -1,13 +1,32 @@
 
 @extends('backend/core')
 @section('title','Dashboard')
+@section('style')
+<style>
+    #redirectUser {
+        width: 100px;
+        height: 100px;
+        cursor: pointer; /* Change cursor to pointer */
+    }
+    #redirectEvaluation {
+        width: 100px;
+        height: 100px;
+        cursor: pointer; /* Change cursor to pointer */
+    }
+    #redirectReviewed {
+        width: 100px;
+        height: 100px;
+        cursor: pointer; /* Change cursor to pointer */
+    }
+</style>
+@endsection
 @section('content')
     <div class="title pb-20">
         <h2 class="h3 mb-0">Employee Overview</h2>
     </div>
 
     <div class="row pb-10">
-        <div class="col-xl-4 col-lg-4 col-md-8 mb-20">
+        <div class="col-xl-4 col-lg-4 col-md-8 mb-20" id="redirectUser">
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
@@ -24,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-4 col-md-8 mb-20">
+        <div class="col-xl-4 col-lg-4 col-md-8 mb-20"  id="redirectEvaluation">
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
@@ -41,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-4 col-md-8 mb-20">
+        <div class="col-xl-4 col-lg-4 col-md-8 mb-20" id="redirectReviewed">
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
@@ -116,6 +135,18 @@
 @endsection
 @section('script')
 <script>
+    
+    document.getElementById('redirectUser').onclick = function() {
+        window.location.href = '/users'
+    };
+    document.getElementById('redirectEvaluation').onclick = function() {
+        window.location.href = '/evaluation'
+    };
+    document.getElementById('redirectReviewed').onclick = function() {
+        window.location.href = '/reviewed'
+    };
+
+
     function tabel() {
         $('#dataDashboard').load("{{ route('dashboard.table') }}", function(response, status, xhr) {
             if (status == "error") {
