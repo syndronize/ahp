@@ -1,5 +1,5 @@
 <div class="row clearfix">
-    @if ($job->empty())
+    @if ($job->isEmpty())
         <div class="col-12 mt-30 mb-30">
             <div class="alert alert-info text-center" role="alert">
                 No jobs available at the moment. Please check back later.

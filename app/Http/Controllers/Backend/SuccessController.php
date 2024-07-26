@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 
 class SuccessController extends Controller
 {
@@ -42,6 +44,7 @@ class SuccessController extends Controller
                                 'core.hardskill',
                                 'core.score',
                                 'core.result',
+                                'u.email as email',
                                 'u.fullname as employee_name',
                                 'us.fullname as hr_name',
                                 'j.nama as job_name',
@@ -51,5 +54,23 @@ class SuccessController extends Controller
                             ->get();
        
         return view('backend.success.tabel',$data);
+    }
+
+    public function email(Request $request){
+        $request->validate([
+            'to' => 'required|email',
+            'subject' => 'required|string',
+            'message' => 'required|string',
+        ]);
+
+        $details = [
+            'to' => $request->to,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ];
+
+        Mail::to($details['to'])->send(new ContactMail($details));
+
+        return response()->json(['success' => 'Email sent successfully!']);
     }
 }

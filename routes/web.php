@@ -83,9 +83,10 @@ Route::middleware('canlogin')->group(function(){
     Route::get('/evaluation-education',[EvaluationController::class,'seeEducation'])->name('education.content');
     Route::get('/evaluation-hardskill',[EvaluationController::class,'seeHardskill'])->name('hardskill.content');
     Route::post('/evaluation-evaluate',[EvaluationController::class,'evaluate'])->name('eval.evaluate');
-
+    
     /** Successfully Reviewed */
     Route::get('/reviewed',[SuccessController::class,'index'])->name('reviewed');
     Route::get('/reviewed-table',[SuccessController::class,'tabel'])->name('reviewed.table');
+    Route::post('/email-sent',[SuccessController::class,'email'])->name('reviewed.email');
 
 });

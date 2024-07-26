@@ -18,6 +18,7 @@
             <th>Job Level</th>
             <th>Final Score</th>
             <th>Result</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -49,6 +50,10 @@
                 @if($value->result == '0')
                     <td>Failed</td>
                 @endif
+                <td>
+                    {{-- <td><button class="btn btn-success" onclick="emailSent('{{$value->email}}')"></button></td> --}}
+                    <a href="mailto:{{$value->email}}?subject=Human%20Resources%20Interview%20at%20PT.%20Curug%20Lintas%20Indonesia&body=Dear%20Interviewer%2C%0ATerkait%20dengan%20proses%20lamaran%20Anda%20di%20PT.Curug%20Lintas%20Indonesia%2C%20kami%20mengundang%20Anda%20untuk%20mengikuti%20Online%20Interview%20pada.%0A%0AHari%20%2F%20Tanggal%20%3A%20%0ALink%20%3A%20%0A%0ADemikian%20informasi%20yang%20dapat%20kami%20sampaikan%0A%0ARegards%2C%0A%0AHuman%20Resources%20Department%0A%0A" class="btn btn-success">Sent</a>
+                </td>
             </tr>
         @endforeach
     </tbody>
