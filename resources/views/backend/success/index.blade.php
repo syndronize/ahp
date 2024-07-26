@@ -67,20 +67,20 @@
         });
     }
 
-    function emailSent(email){
-        event.preventDefault(); // Prevent form submission
-        const to = email;
-        const subject = 'Human Resources Interview at PT. Curug Lintas Indonesia';
-        const message = `Dear Interviewer,%0D%0A` +
-                        `Terkait dengan proses lamaran Anda di PT.Curug Lintas Indonesia, kami mengundang Anda untuk mengikuti Online Interview pada.%0D%0A` +
-                        `Hari / Tanggal :%0A` +
-                        `Link :%0D%0A` +
-                        `Demikian informasi yang dapat kami sampaikan%0D%0A` +
-                        `Regards,%0D%0A` +
-                        `Human Resources Department`;
-        const mailtoLink = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-        window.location.href = mailtoLink;
-    }
+    // function emailSent(email){
+    //     event.preventDefault(); // Prevent form submission
+    //     const to = email;
+    //     const subject = 'Human Resources Interview at PT. Curug Lintas Indonesia';
+    //     const message = `Dear Interviewer,%0D%0A` +
+    //                     `Terkait dengan proses lamaran Anda di PT.Curug Lintas Indonesia, kami mengundang Anda untuk mengikuti Online Interview pada.%0D%0A` +
+    //                     `Hari / Tanggal :%0A` +
+    //                     `Link :%0D%0A` +
+    //                     `Demikian informasi yang dapat kami sampaikan%0D%0A` +
+    //                     `Regards,%0D%0A` +
+    //                     `Human Resources Department`;
+    //     const mailtoLink = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    //     window.location.href = mailtoLink;
+    // }
 
 </script>
 @endsection
