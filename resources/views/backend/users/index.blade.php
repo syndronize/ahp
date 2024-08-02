@@ -143,6 +143,8 @@
     });
 
     function seeCertification(id) {
+        const certificationList = document.getElementById('certificationList');
+        certificationList.innerHTML = '';
         $.ajax({
             url: "{{ route('certification.content') }}",
             type: "GET",
@@ -177,6 +179,8 @@
     }
 
     function seeExperience(id) {
+        const experienceList = document.getElementById('experienceList');
+        experienceList.innerHTML = '';
         $.ajax({
             url: "{{ route('experience.content') }}",
             type: "GET",
@@ -212,6 +216,8 @@
     }
 
     function seeEducation(id) {
+        const educationList = document.getElementById('educationList');
+        educationList.innerHTML = '';
         $.ajax({
             url: "{{ route('education.content') }}",
             type: "GET",
@@ -248,6 +254,8 @@
     }
 
     function seeHardskill(id) {
+        const hardskillList = document.getElementById('hardskillList');
+        hardskillList.innerHTML = '';
         $.ajax({
             url: "{{ route('hardskill.content') }}",
             type: "GET",

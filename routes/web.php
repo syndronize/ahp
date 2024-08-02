@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\JobController;
 use App\Http\Controllers\Backend\EvaluationController;
 use App\Http\Controllers\Backend\SuccessController;
+use App\Http\Controllers\ResponseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,8 @@ Route::middleware('cantlogin')->group(function () {
 
 /** Authentication Access */
 Route::middleware('canlogin')->group(function(){
-    
+    /** All Access */
+
     /** Dashboard */
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::get('/dashboard-table',[DashboardController::class,'tabel'])->name('dashboard.table');
@@ -40,10 +42,7 @@ Route::middleware('canlogin')->group(function(){
     /** Authentication */
     Route::get('/logout',[AuthenticationController::class,'logout'])->name('logout');
     
-    /** Users */
-    Route::get('/users',[UsersController::class,'index'])->name('users.index');
-    Route::get('/users-table',[UsersController::class,'tabel'])->name('users.table');
-    Route::post('/users-add',[UsersController::class,'store'])->name('users.add');
+    
 
     /**Profile */
     Route::get('/profile-account',[ProfileController::class,'index'])->name('profile.index');
@@ -75,20 +74,29 @@ Route::middleware('canlogin')->group(function(){
     Route::delete('/jobs-delete',[JobController::class,'delete'])->name('jobs.delete');
     Route::post('/jobs-see',[JobController::class,'seeJobs'])->name('jobs.see');
     Route::post('/jobs-apply',[JobController::class,'applyJobs'])->name('jobs.apply');
+    /** Private Access */
+    Route::middleware(['check.privilege'])->group(function () {
+        /** Users */
+        Route::get('/users',[UsersController::class,'index'])->name('users.index');
+        Route::get('/users-table',[UsersController::class,'tabel'])->name('users.table');
+        Route::post('/users-add',[UsersController::class,'store'])->name('users.add');
 
-    /** Evaluation */
-    Route::get('/evaluation',[EvaluationController::class,'index'])->name('eval.index');
-    Route::get('/evaluation-content',[EvaluationController::class,'content'])->name('eval.content');
-    Route::get('/evaluation-certification',[EvaluationController::class,'seeCertification'])->name('certification.content');
-    Route::get('/evaluation-experience',[EvaluationController::class,'seeExperience'])->name('experience.content');
-    Route::get('/evaluation-education',[EvaluationController::class,'seeEducation'])->name('education.content');
-    Route::get('/evaluation-hardskill',[EvaluationController::class,'seeHardskill'])->name('hardskill.content');
-    Route::post('/evaluation-evaluate',[EvaluationController::class,'evaluate'])->name('eval.evaluate');
+        /** Evaluation */
+        Route::get('/evaluation', [EvaluationController::class, 'index'])->name('eval.index');
+        Route::get('/evaluation-content', [EvaluationController::class, 'content'])->name('eval.content');
+        Route::get('/evaluation-certification', [EvaluationController::class, 'seeCertification'])->name('certification.content');
+        Route::get('/evaluation-experience', [EvaluationController::class, 'seeExperience'])->name('experience.content');
+        Route::get('/evaluation-education', [EvaluationController::class, 'seeEducation'])->name('education.content');
+        Route::get('/evaluation-hardskill', [EvaluationController::class, 'seeHardskill'])->name('hardskill.content');
+        Route::post('/evaluation-evaluate', [EvaluationController::class, 'evaluate'])->name('eval.evaluate');
     
-    /** Successfully Reviewed */
-    Route::get('/reviewed',[SuccessController::class,'index'])->name('reviewed');
-    Route::get('/reviewed-table',[SuccessController::class,'tabel'])->name('reviewed.table');
-    Route::get('/reviewed-overviewed',[SuccessController::class,'overview'])->name('reviewed.overview');
-    Route::post('/email-sent',[SuccessController::class,'email'])->name('reviewed.email');
+        /** Reviewed */
+        Route::get('/reviewed', [SuccessController::class, 'index'])->name('reviewed');
+        Route::get('/reviewed-table', [SuccessController::class, 'tabel'])->name('reviewed.table');
+        Route::get('/reviewed-overviewed', [SuccessController::class, 'overview'])->name('reviewed.overview');
+        Route::post('/email-sent', [SuccessController::class, 'email'])->name('reviewed.email');
+    });
+    Route::get('/forbidden-access',[ResponseController::class,'forbidden'])->name('response.403');
+    
 
 });
