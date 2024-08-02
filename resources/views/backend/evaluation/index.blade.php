@@ -213,7 +213,8 @@
                 id: id
             },
             success: function(res) {
-                console.log(res);
+                $('#experienceList').innerHTML('');
+
                 $.each(res.data.experiences, function(index, val) {
                     var experienceHtml = `
                         
@@ -249,10 +250,11 @@
             },
             success: function(res) {
                 console.log(res);
+                $('#educationList').innerHTML('');
+
                 $.each(res.data.educations, function(index, val) {
                     var formattedGPA = parseFloat(val.gpa).toFixed(2);
                     var educationHtml = `
-                        
                         <div class="col-lg-12 input-container">
                             <span style="font-weight:bold; margin-bottom:20px;"> ${index + 1 } . ${val.instansi} - ${val.major}</span> 
                             <div class="row mb-2">
@@ -285,6 +287,8 @@
             },
             success: function(res) {
                 console.log(res);
+                $('#hardskillList').innerHTML('');
+
                 $.each(res.data.hardskills, function(index, val) {
                     var hardskillHtml = `
                         
@@ -304,6 +308,10 @@
 
     function openEvaluateModal(id){
         $('#evaluateId').val(id);
+        $('#certificationScore').val('');
+        $('#experienceScore').val('');
+        $('#educationScore').val('');
+        $('#hardskillScore').val('');
         $('#evaluateModal').modal('show');
     }
 
