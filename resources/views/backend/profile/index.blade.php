@@ -192,7 +192,7 @@
         inputInstansi.type = 'text';
         inputInstansi.className = 'form-control mb-1';
         inputInstansi.id = 'fieldInstansi' + counterEducation;
-        inputInstansi.placeholder = 'Instansi';
+        inputInstansi.placeholder = 'Institute';
 
         colInstansiDiv.appendChild(inputInstansi);
 
