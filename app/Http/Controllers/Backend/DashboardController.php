@@ -135,7 +135,7 @@ class DashboardController extends Controller
                 ->where('id', $id)
                 ->update([
                     'result' => $result,
-                    'result_manager' => '2',
+                    'result_manager' => '0',
                     'updated_at' => now()
                 ]);
             }

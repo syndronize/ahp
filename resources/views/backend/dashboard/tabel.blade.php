@@ -68,7 +68,7 @@
                         <div>Need Manager Acknowledge</div>
                     @endif
                     @if ($value->result == '2' && $value->result_manager == NULL)
-                        <div>Doesn't Action from HR</div>
+                        <div>Waiting Action from HR</div>
                     @endif
                     
                     @if($value->result_manager == '1')

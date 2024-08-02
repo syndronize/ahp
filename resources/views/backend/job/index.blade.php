@@ -154,6 +154,10 @@
 
                 setTimeout(() => { 
                     listJobs()
+                        $('#jobname').val('');
+                        $('#description').val('');
+                        $('#requirement').val('');
+                        $('#level').val('');
                  }, 1500);
             },
             error: function(res) {

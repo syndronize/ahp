@@ -178,6 +178,7 @@
                 id: id
             },
             success: function(res) {
+                $('#certificationList').innerHTML('');
                 $.each(res.data.certifications, function(index, val) {
                     var certificationHtml = `
                         
