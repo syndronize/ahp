@@ -164,6 +164,7 @@ class EvaluationController extends Controller
                     $colSums[$colIndex] += $value;
                 }
             }
+            
     
             // Normalisasi matriks
             $normalizedMatrix = [];
@@ -215,6 +216,7 @@ class EvaluationController extends Controller
                 'result' => '2',
                 'created_at' => now(), 
             ]); 
+            
             return json_encode([
                 'status' => 'success',
                 'text' => 'berhasil mengupdate data'

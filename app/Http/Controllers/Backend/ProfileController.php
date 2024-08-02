@@ -13,14 +13,12 @@ use Illuminate\Validation\ValidationException;
 class ProfileController extends Controller
 {
     public function index(){
-        // var_dump(Session()->all());die;
         $id = Session()->get('email');
         #profile basic
         $data['user'] = DB::table('users')
                         ->select('fullname','email','birthday')
                         ->where('email',$id)
                         ->first();
-
         
         return view('backend.profile.index',$data);
     }

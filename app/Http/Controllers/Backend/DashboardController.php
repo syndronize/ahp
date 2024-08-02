@@ -45,6 +45,7 @@ class DashboardController extends Controller
                             'ev.hardskill',
                             'ev.job_id',
                             'rs.result',
+                            'rs.result_manager',
                             'rs.score'
                         )
                         ->where('ev.employee_id',$id);
@@ -62,6 +63,7 @@ class DashboardController extends Controller
                                     'core.hardskill',
                                     'core.score',
                                     'core.result',
+                                    'core.result_manager',
                                     'u.fullname as employee_name',
                                     'us.fullname as hr_name',
                                     'j.nama as job_name',
@@ -83,6 +85,7 @@ class DashboardController extends Controller
                             'ev.hardskill',
                             'ev.job_id',
                             'rs.result',
+                            'rs.result_manager',
                             'rs.score'
                         );
 
@@ -99,12 +102,14 @@ class DashboardController extends Controller
                                     'core.hardskill',
                                     'core.score',
                                     'core.result',
+                                    'core.result_manager',
                                     'u.fullname as employee_name',
                                     'us.fullname as hr_name',
                                     'j.nama as job_name',
                                     'j.level as job_level'
                                 )
                                 ->whereIn('result',['2'])
+                                ->orWhereIn('result_manager',['2'])
                                 ->get();
         }
         
@@ -116,11 +121,46 @@ class DashboardController extends Controller
             $id = $req->id;
             $result = $req->result;
 
+            if ($result == '1') {
+
+                DB::table('results')
+                ->where('id', $id)
+                ->update([
+                    'result' => $result,
+                    'result_manager' => '2',
+                    'updated_at' => now()
+                ]);
+            }else{
+                DB::table('results')
+                ->where('id', $id)
+                ->update([
+                    'result' => $result,
+                    'result_manager' => '2',
+                    'updated_at' => now()
+                ]);
+            }
+            return response()->json([
+                'message' => 'success',
+                'text' => 'Result Update successfully.'
+            ], 200);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'error',
+                'text' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function updateResultManager(Request $req){
+        try {
+            $id = $req->id;
+            $result = $req->result;
+
             
             DB::table('results')
                 ->where('id', $id)
                 ->update([
-                    'result' => $result,
+                    'result_manager' => $result,
                     'updated_at' => now()
                 ]);
             return response()->json([

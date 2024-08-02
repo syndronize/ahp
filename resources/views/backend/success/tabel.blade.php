@@ -17,12 +17,21 @@
             <th>Job Name</th>
             <th>Job Level</th>
             <th>Final Score</th>
-            <th>Result</th>
+            <th>Status</th>
+            <th>Acknowledge</th>
             {{-- <th>Action</th> --}}
         </tr>
     </thead>
     <tbody>
+        @php
+            use Carbon\Carbon;
+        @endphp
+
         @foreach ($interviewer as $value)
+            @php
+                $date = Carbon::parse($value->updated_at);
+                $formattedDate = $date->formatLocalized('%A, %d %B %Y');
+            @endphp
             <tr>
                 <td class="table-plus">
                     <div class="name-avatar d-flex align-items-center">
@@ -35,26 +44,27 @@
                 <td>{{$value->hr_name}}</td>
                 <td>{{$value->job_name}}</td>
                 <td>{{$value->job_level}}</td>
-                <td>{{$value->score}}</td>
-                @if ($value->result == '2')
-                    <td>
-                        <div class="text-center">
-                            <button class="btn btn-success" onclick="updateResult('1','{{$value->id_result}}')"><i class="fas fa-check"></i></button>
-                            <button class="btn btn-danger" onclick="updateResult('0','{{$value->id_result}}')"><i class="fas fa-times"></i></button>
-                        </div>
-                    </td>
-                @endif
-                @if($value->result == '1')
-                    <td>Ready to Interview</td>
-                @endif
-                @if($value->result == '0')
-                    <td>Failed</td>
-                @endif
-                {{-- <td> --}}
-                    {{-- <td><button class="btn btn-success" onclick="emailSent('{{$value->email}}')"></button></td> --}}
-                    {{-- <a href="mailto:{{$value->email}}?subject=Human%20Resources%20Interview%20at%20PT.%20Curug%20Lintas%20Indonesia&body=Dear%20Interviewer%2C%0ATerkait%20dengan%20proses%20lamaran%20Anda%20di%20PT.Curug%20Lintas%20Indonesia%2C%20kami%20mengundang%20Anda%20untuk%20mengikuti%20Online%20Interview%20pada.%0A%0AHari%20%2F%20Tanggal%20%3A%20%0ALink%20%3A%20%0A%0ADemikian%20informasi%20yang%20dapat%20kami%20sampaikan%0A%0ARegards%2C%0A%0AHuman%20Resources%20Department%0A%0A" class="btn btn-success">Sent</a> --}}
-                {{-- </td> --}}
+                <td><a href="#" type="button" onclick="stepOverview({{$value->id_evaluation}})">{{$value->score}}</a></td>
+                <td>
+                    @if($value->result == '1' && $value->result_manager == '1')
+                    Ready to Interview
+                    @else
+                    Failed
+                    @endif
+                </td>
+                <td>
+                    @if($value->result_manager == '1')
+                        Approve by HR Manager on {{ ucfirst($formattedDate) }}
+                    @endif
+                    @if($value->result_manager == '0')
+                        Doesn't Approve by HR Manager  on {{ ucfirst($formattedDate) }}
+                    @endif
+                    @if ($value->result == '0' && $value->result_manager == '2')
+                        Doesn't Approve by HR
+                    @endif
+                </td>
+                
             </tr>
-        @endforeach
+        @endforeach 
     </tbody>
-</table>
+</table> 

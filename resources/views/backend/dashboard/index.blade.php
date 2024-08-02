@@ -226,5 +226,49 @@
             }
         });
     }
+
+    function updateResultManager(resultHasil,id) {
+        
+        Swal.fire({
+            title: "Do you want to save the changes?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Save",
+            denyButtonText: `Don't save`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{ route('dashboard.updateManager') }}",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        id: id,
+                        result: resultHasil,
+                    },
+                    success: function(res) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: res.text,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        tabel();
+
+                    },
+                    error: function(res) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Cannot Update Please Call your Admin!",
+                        });
+                        tabel();
+                    }
+                });
+            } else if (result.isDenied) {
+                Swal.fire("Changes are not saved", "", "info");
+            }
+        });
+    }
 </script>
 @endsection

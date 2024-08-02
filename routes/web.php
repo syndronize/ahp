@@ -35,6 +35,7 @@ Route::middleware('canlogin')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::get('/dashboard-table',[DashboardController::class,'tabel'])->name('dashboard.table');
     Route::post('/dashboard-update',[DashboardController::class,'updateResult'])->name('dashboard.update');
+    Route::post('/dashboard-update-manager',[DashboardController::class,'updateResultManager'])->name('dashboard.updateManager');
 
     /** Authentication */
     Route::get('/logout',[AuthenticationController::class,'logout'])->name('logout');
@@ -87,6 +88,7 @@ Route::middleware('canlogin')->group(function(){
     /** Successfully Reviewed */
     Route::get('/reviewed',[SuccessController::class,'index'])->name('reviewed');
     Route::get('/reviewed-table',[SuccessController::class,'tabel'])->name('reviewed.table');
+    Route::get('/reviewed-overviewed',[SuccessController::class,'overview'])->name('reviewed.overview');
     Route::post('/email-sent',[SuccessController::class,'email'])->name('reviewed.email');
 
 });
