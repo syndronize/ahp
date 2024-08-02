@@ -44,7 +44,7 @@
                 <td>{{$value->hr_name}}</td>
                 <td>{{$value->job_name}}</td>
                 <td>{{$value->job_level}}</td>
-                <td><a href="#" type="button" onclick="stepOverview({{$value->id_evaluation}})">{{$value->score}}</a></td>
+                <td><a href="#" type="button" onclick="stepOverview({{$value->id_evaluation}})">{{$value->score}} </a></td>
                 <td>
                     @if($value->result == '1' && $value->result_manager == '1')
                     Ready to Interview

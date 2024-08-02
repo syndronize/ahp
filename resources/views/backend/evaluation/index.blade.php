@@ -170,6 +170,8 @@
     }
 
     function seeCertification(id) {
+        const certificationList = document.getElementById('certificationList');
+        certificationList.innerHTML = '';
         $.ajax({
             url: "{{ route('certification.content') }}",
             type: "GET",
@@ -178,7 +180,7 @@
                 id: id
             },
             success: function(res) {
-                $('#certificationList').innerHTML('');
+                
                 $.each(res.data.certifications, function(index, val) {
                     var certificationHtml = `
                         
@@ -205,6 +207,8 @@
     }
 
     function seeExperience(id) {
+        const experienceList = document.getElementById('experienceList');
+        experienceList.innerHTML = '';
         $.ajax({
             url: "{{ route('experience.content') }}",
             type: "GET",
@@ -213,7 +217,7 @@
                 id: id
             },
             success: function(res) {
-                $('#experienceList').innerHTML('');
+                
 
                 $.each(res.data.experiences, function(index, val) {
                     var experienceHtml = `
@@ -241,6 +245,8 @@
     }
 
     function seeEducation(id) {
+        const educationList = document.getElementById('educationList');
+        educationList.innerHTML = '';
         $.ajax({
             url: "{{ route('education.content') }}",
             type: "GET",
@@ -250,7 +256,7 @@
             },
             success: function(res) {
                 console.log(res);
-                $('#educationList').innerHTML('');
+                
 
                 $.each(res.data.educations, function(index, val) {
                     var formattedGPA = parseFloat(val.gpa).toFixed(2);
@@ -278,6 +284,8 @@
     }
 
     function seeHardskill(id) {
+        const hardskillList = document.getElementById('hardskillList');
+        hardskillList.innerHTML = '';
         $.ajax({
             url: "{{ route('hardskill.content') }}",
             type: "GET",
@@ -287,7 +295,7 @@
             },
             success: function(res) {
                 console.log(res);
-                $('#hardskillList').innerHTML('');
+                
 
                 $.each(res.data.hardskills, function(index, val) {
                     var hardskillHtml = `

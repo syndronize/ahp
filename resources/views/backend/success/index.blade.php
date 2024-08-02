@@ -95,7 +95,6 @@
                 id: id
             },
             success: function(res) {
-                console.log(res.data);
                 const overviewList = document.getElementById('overviewList');
                 overviewList.innerHTML = '';
 

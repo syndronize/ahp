@@ -86,7 +86,7 @@ class SuccessController extends Controller
         try {
             $id = $request->id;
             $data['overview'] = DB::table('evaluations as ev')
-                                ->leftJoin('results as rs', 'ev.id', '=', 'rs.id')
+                                ->leftJoin('results as rs', 'ev.id', '=', 'rs.evaluation_id')
                                 ->where('evaluation_id', $id)
                                 ->select('ev.certification', 'ev.pengalaman', 'ev.pendidikan', 'ev.hardskill', 'rs.score')
                                 ->first();
